@@ -4,8 +4,13 @@ import numpy as np
 
 # Load the trained model
 model_filename = 'model_uas.pkl'
-with open(model_filename, 'rb') as file:
-    model = pickle.load(file)
+try:
+    with open(model_filename, 'rb') as file:
+        model = pickle.load(file)
+except ModuleNotFoundError as e:
+    st.error(f"Module not found: {e}")
+except Exception as e:
+    st.error(f"An error occurred: {e}")
 
 # Define the Streamlit app
 st.title('Insurance Charges Prediction')
